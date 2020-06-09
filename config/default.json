@@ -1,4 +1,4 @@
 {
   "port": 5000,
-  "mongoURI" : ""
+  "mongoURI" : "mongodb+srv://vahemm:vvm471992015M@cluster0-sscww.azure.mongodb.net/app?retryWrites=true&w=majority"
 }
