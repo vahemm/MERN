@@ -6,6 +6,7 @@ const authRout = require("./routes/auth.rout");
 const app = express();
 const PORT = config.get("port") || 5000;
 
+app.use(express.json({extended:true}))
 app.use("/api/auth", authRout)
 
 async function startDB() {
