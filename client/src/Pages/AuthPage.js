@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useHttp} from "../hooks/http.hooks";
 import {useMessage} from "../hooks/message.hook";
+import {AuthContext} from "../context/AuthContext";
 
 export const AuthPage = () => {
+    const  auth = useContext(AuthContext)
     const {request, loading, error, clearError} = useHttp();
     const [form, setForm] = useState({
         email: "", password: ""
@@ -14,6 +16,9 @@ export const AuthPage = () => {
         message(error)
         clearError()
     }, [error, message, clearError])
+    useEffect(()=>{
+        window.M.updateTextFields()
+    },[]);
     const changeHendler = event => {
 
         setForm({...form, [event.target.name]: event.target.value})
@@ -31,8 +36,8 @@ export const AuthPage = () => {
     const loginHendler = async () => {
         try {
             const data = await request("/api/auth/login","POST", {...form} )
-            console.log("data", data)
-            message(data.message)
+
+            auth.login(data.token, data.userID)
         } catch (e) {
 
         }
@@ -51,6 +56,7 @@ export const AuthPage = () => {
                                        id="email"
                                        type="text"
                                        name="email"
+                                       value={form.email}
                                        onChange={changeHendler}
                                 />
                                 <label style={{fontSize: 25}} htmlFor="email">Email</label>
@@ -60,6 +66,7 @@ export const AuthPage = () => {
                                        id="password"
                                        type="password"
                                        name="password"
+                                       value={form.password}
                                        onChange={changeHendler}
                                 />
                                 <label style={{fontSize: 25}} htmlFor="password">Password</label>

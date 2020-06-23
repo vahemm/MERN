@@ -21,7 +21,8 @@
     "express-validator": "^6.5.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.18",
-    "proxy": "^1.0.1"
+    "proxy": "^1.0.1",
+    "shortid": "^2.2.15"
   },
   "devDependencies": {
     "concurrently": "^5.2.0",
