@@ -2,6 +2,9 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 export const LinkList = ({link}) => {
+    if (!link.length){
+        return <h3> No links</h3>
+    }
     return (
         <table>
             <thead>
@@ -16,7 +19,7 @@ export const LinkList = ({link}) => {
             <tbody>
             {link.map((item, index) => {
 
-                return (<tr>
+                return (<tr key={item._id}>
                     <td>{index + 1}</td>
                     <td>{item.from}</td>
                     <td>{item.to}</td>
